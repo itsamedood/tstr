@@ -39,8 +39,6 @@ class Cli:
 
         case _:
           ...
-          # print("-%s is not a flag." %flag)
-          # exit(1)
 
   def ispath(self, _arg: str) -> bool:
     """ Returns `True` if given arg exists as a path and leads to a file. """
@@ -62,6 +60,10 @@ class Cli:
 
       # For some reason, when trying to test this on `.editorconfig`, the program hangs.
       # Works on every other file including `.gitignore`, I'm so confused...
+
+      # The problem was the word `root`.
+      # The middle characters are identical, there's no way to rearrange it in this context.
+      # I added `LOOP_MAX` and then implemented it wrong, but it's fixed now.
       if self.ispath(pp:=abspath(potential_path)):
         try:
           with open(pp, 'r') as file:

@@ -53,7 +53,7 @@ class TypoglycemiaEngine:
     for word in words:
       if len(word) > 3:  # Prevents the loop below from being infinite given something like 'the'.
       # Ensure that the string is not the same, which are pretty low odds but still.
-        while ((reword:=self.rearrange(word)) == word) or tries >= self.LOOP_MAX:
+        while ((reword:=self.rearrange(word)) == word) and tries < self.LOOP_MAX:
           tries += 1
           continue
 
